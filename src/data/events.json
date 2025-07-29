@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "title": "Tech Workshop",
+    "type": "Workshop",
+    "date": "2025-08-01",
+    "location": "Hall A",
+    "speakers": [1],
+    "audience": "Developers"
+  }
+]
