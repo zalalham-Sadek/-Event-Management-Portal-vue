@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex items-center w-full max-w-xs">
+  <div class="relative flex items-center w-full ">
     <span class="absolute left-3 text-gray-400 pointer-events-none" v-if="icon">
       <i :class="icon"></i>
     </span>

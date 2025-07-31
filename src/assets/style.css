@@ -3,7 +3,6 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
- 
   --color-primary: #008f32;
   --color-primary-100: #fffffffd;
   --color-accent: #91dfb1;
@@ -12,24 +11,40 @@
   --color-background-secondary: #ffffff;
   --color-primary-text: #1a1a1a;
   --color-gray-50: #f9fafb;
-
 }
 
 @layer base {
   .dark {
-      --color-primary: #99dbb1;
-        --color-primary-100: #05462d;
+    --color-primary: #99dbb1;
+    --color-primary-100: #05462d;
 
-  --color-accent: #99dbb3;
-  --color-secondary: #008f32;
-  --color-background-primary: #0f1a12;
-  --color-background-secondary: #4e7a5a;
-  --color-primary-text: #f0fdf4;
-  --color-primary-text: #fffffffd;
+    --color-accent: #99dbb3;
+    --color-secondary: #008f32;
+    --color-background-primary: #0f1a12;
+    --color-background-secondary: #4e7a5a;
+    --color-primary-text: #f0fdf4;
+    --color-primary-text: #fffffffd;
     --color-gray-50: #577556;
-
   }
+}
+
+.ti-btn-primary{
+  @apply bg-secondary text-white opacity-100 inline-block m-1 items-center justify-center gap-2 rounded border
+  border-transparent pt-1.5
+  ;
+}
 
 
- 
+/* You can customize Tagify styles further */
+.tagify {
+  @apply rounded border border-gray-300 py-1 px-2 text-sm shadow-sm;
+}
+
+
+.ti-btn {
+  @apply inline-flex items-center justify-center gap-2 rounded border border-transparent px-3 py-1.5 text-sm font-medium transition-all duration-150 ease-in-out cursor-pointer m-1;
+}
+.label-ti-btn {
+  position: relative !important;
+  padding-inline-start: 2.6rem !important;
 }
