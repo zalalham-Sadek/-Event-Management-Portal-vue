@@ -1,11 +1,27 @@
 [
-  {
-    "id": 1,
-    "title": "Tech Workshop",
-    "type": "Workshop",
-    "date": "2025-08-01",
-    "location": "Hall A",
-    "speakers": [1],
-    "audience": "Developers"
-  }
+  { "id": 1, "title": "Vue.js Conference", "type": "Conference", "date": "2025-08-10", "location": "Main Hall", "speakers": [1, 2], "audience": "Developers" },
+  { "id": 2, "title": "AI Workshop", "type": "Workshop", "date": "2025-08-15", "location": "Lab 1", "speakers": [2], "audience": "Researchers" },
+  { "id": 3, "title": "Web Security Talk", "type": "Seminar", "date": "2025-08-18", "location": "Auditorium", "speakers": [3], "audience": "IT Professionals" },
+  { "id": 4, "title": "Cloud Expo", "type": "Expo", "date": "2025-08-20", "location": "Exhibit Hall A", "speakers": [4], "audience": "Startups" },
+  { "id": 5, "title": "Intro to Python", "type": "Workshop", "date": "2025-08-22", "location": "Lab 3", "speakers": [5], "audience": "Students" },
+  { "id": 6, "title": "Tech Entrepreneurship", "type": "Seminar", "date": "2025-08-25", "location": "Room 202", "speakers": [6], "audience": "Entrepreneurs" },
+  { "id": 7, "title": "AI for Healthcare", "type": "Conference", "date": "2025-08-28", "location": "Main Hall", "speakers": [7], "audience": "Doctors" },
+  { "id": 8, "title": "React Native Bootcamp", "type": "Workshop", "date": "2025-09-01", "location": "Lab 2", "speakers": [8], "audience": "Mobile Developers" },
+  { "id": 9, "title": "Cybersecurity Basics", "type": "Workshop", "date": "2025-09-03", "location": "Lab 4", "speakers": [9], "audience": "IT Admins" },
+  { "id": 10, "title": "Green Tech Forum", "type": "Conference", "date": "2025-09-05", "location": "Hall B", "speakers": [10], "audience": "Environmentalists" },
+  { "id": 11, "title": "IoT Devices Summit", "type": "Conference", "date": "2025-09-07", "location": "Main Hall", "speakers": [1, 3], "audience": "Tech Companies" },
+  { "id": 12, "title": "UX/UI Design Days", "type": "Expo", "date": "2025-09-09", "location": "Design Center", "speakers": [4], "audience": "Designers" },
+  { "id": 13, "title": "Machine Learning 101", "type": "Workshop", "date": "2025-09-12", "location": "Lab 5", "speakers": [2, 6], "audience": "Students" },
+  { "id": 14, "title": "Blockchain & Finance", "type": "Seminar", "date": "2025-09-14", "location": "Finance Hall", "speakers": [5], "audience": "Investors" },
+  { "id": 15, "title": "VR/AR World", "type": "Expo", "date": "2025-09-16", "location": "Exhibit Hall B", "speakers": [7], "audience": "Gamers" },
+  { "id": 16, "title": "JavaScript Best Practices", "type": "Seminar", "date": "2025-09-18", "location": "Room 301", "speakers": [8], "audience": "Web Developers" },
+  { "id": 17, "title": "Women in Tech", "type": "Conference", "date": "2025-09-20", "location": "Main Hall", "speakers": [9], "audience": "All" },
+  { "id": 18, "title": "AI Ethics Panel", "type": "Seminar", "date": "2025-09-22", "location": "Auditorium", "speakers": [10], "audience": "Researchers" },
+  { "id": 19, "title": "Startup Pitch Day", "type": "Expo", "date": "2025-09-24", "location": "Startup Zone", "speakers": [3], "audience": "Investors" },
+  { "id": 20, "title": "Node.js Live Coding", "type": "Workshop", "date": "2025-09-26", "location": "Lab 6", "speakers": [1], "audience": "Backend Developers" },
+  { "id": 21, "title": "Kubernetes for DevOps", "type": "Seminar", "date": "2025-09-28", "location": "Room 105", "speakers": [6], "audience": "DevOps Engineers" },
+  { "id": 22, "title": "Tech Career Fair", "type": "Expo", "date": "2025-10-01", "location": "Career Center", "speakers": [], "audience": "Graduates" },
+  { "id": 23, "title": "Fullstack Hackathon", "type": "Conference", "date": "2025-10-04", "location": "Hack Zone", "speakers": [2, 8], "audience": "Hackers" },
+  { "id": 24, "title": "Data Science Meetup", "type": "Seminar", "date": "2025-10-06", "location": "Room 404", "speakers": [4], "audience": "Data Scientists" },
+  { "id": 25, "title": "Open Source Day", "type": "Conference", "date": "2025-10-08", "location": "Community Hall", "speakers": [5, 9], "audience": "Contributors" }
 ]

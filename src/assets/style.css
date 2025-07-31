@@ -11,6 +11,7 @@
   --color-background-primary: #ffffff;
   --color-background-secondary: #ffffff;
   --color-primary-text: #1a1a1a;
+  --color-gray-50: #f9fafb;
 
 }
 
@@ -25,6 +26,8 @@
   --color-background-secondary: #4e7a5a;
   --color-primary-text: #f0fdf4;
   --color-primary-text: #fffffffd;
+    --color-gray-50: #577556;
+
   }
 
 

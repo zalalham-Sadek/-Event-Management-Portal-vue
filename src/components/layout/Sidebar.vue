@@ -18,7 +18,7 @@
 
 
       <!-- Close button (mobile only) -->
-      <button @click="closeSidebar" class="md:hidden text-white text-2xl">
+      <button @click="closeSidebar" class="md:hidden text-accent text-2xl hover:cursor-pointer">
         &times;
       </button>
     </div>
