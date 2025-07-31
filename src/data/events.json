@@ -23,5 +23,5 @@
   { "id": 22, "title": "Tech Career Fair", "type": "Expo", "date": "2025-10-01", "location": "Career Center", "speakers": [], "audience": "Graduates" },
   { "id": 23, "title": "Fullstack Hackathon", "type": "Conference", "date": "2025-10-04", "location": "Hack Zone", "speakers": [2, 8], "audience": "Hackers" },
   { "id": 24, "title": "Data Science Meetup", "type": "Seminar", "date": "2025-10-06", "location": "Room 404", "speakers": [4], "audience": "Data Scientists" },
-  { "id": 25, "title": "Open Source Day", "type": "Conference", "date": "2025-10-08", "location": "Community Hall", "speakers": [5, 9], "audience": "Contributors" }
+  { "id": 27, "title": "Open Source Day", "type": "Conference", "date": "2025-10-08", "location": "Community Hall", "speakers": [5, 9], "audience": "Contributors" }
 ]

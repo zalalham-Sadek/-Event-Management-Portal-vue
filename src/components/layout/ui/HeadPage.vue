@@ -7,7 +7,9 @@
         <li class="inline pl-2 text-gray-600 dark:text-gray-400">{{title}}</li>
       </ul>
       <div v-if="enableBtn">
-        <button class="bg-primary text-primary-100 rounded px-4 py-1">{{btnTitle}}</button>
+        <Btn :btnTitle="btnTitle" :href="href"  />
+        <!-- <button type="button" class="ti-btn ti-btn-primary label-ti-btn"> <i class="fas fa-add label-ti-btn-icon  me-2"></i> {{btnTitle}} </button> -->
+        <!-- <button class="bg-primary text-primary-100 rounded px-4 py-1"></button> -->
       </div>
     </div>
 </template>
@@ -19,6 +21,7 @@ export default{
         title:String,
         enableBtn:Boolean,
         btnTitle:String,
+        href:String
 
     }
 }

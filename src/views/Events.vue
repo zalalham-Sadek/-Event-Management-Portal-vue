@@ -1,7 +1,7 @@
 <template>
   <div class="p-6 max-w-7xl mx-auto bg-gray-50">
 
-    <headPage part="Events" title="overview" :enableBtn="true" btnTitle="Add Event" />
+    <headPage part="Events" title="overview" :enableBtn="true" btnTitle="Add Event" href="/events/create"  />
 
     <div class="col-span-12 md:col-span-6">
       <div
@@ -37,7 +37,7 @@ export default {
   name: 'EventsOverview',
   data() {
     return {
-      events: eventData,
+      events: [],
       filters: {
         type: '',
         location: '',
@@ -50,6 +50,17 @@ export default {
 
     };
   },
+  created() {
+  // Load events from localStorage or fallback to JSON file
+  const savedEvents = localStorage.getItem('events');
+  if (savedEvents) {
+    this.events = JSON.parse(savedEvents);
+  } else {
+    this.events = eventData;
+    // Save default events to localStorage for future use
+    localStorage.setItem('events', JSON.stringify(eventData));
+  }
+},
   components: {
     SearchAndPerpage,
     SelectField, InputField, FilterPanel, HeadPage, TableEvent, Pagination
@@ -117,18 +128,22 @@ export default {
     toggleDropdown(index) {
       this.openDropdown = this.openDropdown === index ? null : index;
     },
-    editEvent(event) {
-      // Your edit logic here
-      console.log('Edit', event);
-    },
-    deleteEvent(event) {
-      // Your delete logic here
-      console.log('Delete', event);
-    },
-    viewEvent(event) {
-      // Your view logic here
-      console.log('View', event);
-    }
+   updateLocalStorage() {
+    localStorage.setItem('events', JSON.stringify(this.events));
+  },
+  deleteEvent(event) {
+    this.events = this.events.filter(e => e.id !== event.id);
+    this.updateLocalStorage();
+    console.log('Deleted event:', event);
+  },
+  editEvent(event) {
+    // implement your edit logic here (e.g., open form with event data)
+    console.log('Edit event:', event);
+    // After editing and updating events array, call this.updateLocalStorage()
+  },
+  viewEvent(event) {
+    console.log('View event:', event);
+  }
   }
 };
 </script>
