@@ -10,7 +10,7 @@
 
 
     <!-- Main Content -->
-    <main class="pt-16 transition-all duration-300 " :class="sidebarCollapsed ? 'md:pl-20' : 'md:pl-64'">
+    <main class="pt-16 transition-all duration-300 overflow-y-auto" :class="sidebarCollapsed ? 'md:pl-20' : 'md:pl-64'">
       <router-view></router-view>
     </main>
   </div>
