@@ -1,14 +1,6 @@
 <template>
-<div
-  v-if="toastVisible"
-  :class="[
-    'fixed bottom-5 left-1/2 transform -translate-x-1/2 text-white px-6 py-3 rounded-lg shadow-lg transition-opacity duration-300',
-    toastType.value === 'success' ? 'bg-green-500' : 'bg-red-500'
-  ]"
-  style="opacity: 1;"
->
-  {{ toastMessage }}
-</div>
+<ToastMessage :message="toastMessage" :visible="toastVisible" :type="toastType" />
+
 
 
 
@@ -173,6 +165,7 @@ import '@yaireo/tagify/dist/tagify.css'
 // Import speakers JSON data
 import speakersData from '@/data/speakers.json' // adjust path as needed
 import Events from '@/data/events.json' // adjust path as needed
+import ToastMessage from '@/components/layout/ui/ToastMessage.vue'
 
 // ... باقي الكود ...
 

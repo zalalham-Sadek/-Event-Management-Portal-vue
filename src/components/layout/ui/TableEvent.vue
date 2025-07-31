@@ -33,12 +33,13 @@
                                     <a href="#" class="block px-4 py-2 hover:bg-gray-100" @click="editEvent(event)">
                                         <i class="fas fa-edit pr-3 text-xs"></i>Edit
                                     </a>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100" @click="deleteEvent(event)">
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100" @click.prevent="deleteEvent(event)">
                                         <i class="fas fa-trash pr-3 text-xs"></i>Delete
                                     </a>
-                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100" @click="viewEvent(event)">
-                                        <i class="fas fa-eye pr-3 text-xs"></i>View
-                                    </a>
+                                   <a href="#" class="block px-4 py-2 hover:bg-gray-100" @click.prevent="viewEvent(event)">
+  <i class="fas fa-eye pr-3 text-xs"></i>View
+</a>
+
                                 </div>
                             </div>
                         </div>
@@ -50,9 +51,20 @@
             </tr>
         </tbody>
     </table>
+    <EventDetailModal
+  :visible="showModal"
+  :event="selectedEvent"
+  @close="closeModal"
+/>
+  <ToastMessage :message="toastMessage" :visible="toastVisible" :type="toastType" />
+
+
 </template>
 
 <script>
+import EventDetailModal from './Modal.vue';
+import ToastMessage from './ToastMessage.vue';
+
 export default {
     props: {
         colTitle: {
@@ -61,9 +73,18 @@ export default {
         },
         paginatedEvents: Array,
     },
+    components: {
+  EventDetailModal,ToastMessage
+},
+
     data() {
         return {
             openDropdown: null,
+             showModal: false,
+    selectedEvent: null,
+     toastMessage: '',
+    toastVisible: false,
+    toastType: 'success',
         };
     },
     methods: {
@@ -73,12 +94,39 @@ export default {
         editEvent(event) {
             console.log('Editing:', event);
         },
-        deleteEvent(event) {
-            console.log('Deleting:', event);
-        },
-        viewEvent(event) {
-            console.log('Viewing:', event);
-        },
+deleteEvent(event) {
+  const stored = localStorage.getItem('events');
+  if (!stored) return;
+
+  const events = JSON.parse(stored);
+  const updatedEvents = events.filter(e => e.id !== event.id);
+  localStorage.setItem('events', JSON.stringify(updatedEvents));
+
+  // Show toast
+  this.showToast('Event deleted successfully', 'success');
+
+  // Optional: Delay reload slightly so toast is visible
+  setTimeout(() => {
+    window.location.reload(); // Or reload your data without full page reload
+  }, 1000);
+}
+,
+          viewEvent(event) {
+    this.selectedEvent = event;
+    this.showModal = true;
+  },
+  closeModal() {
+    this.showModal = false;
+    this.selectedEvent = null;
+  },
+   showToast(message, type = 'success', duration = 5000) {
+    this.toastMessage = message;
+    this.toastType = type;
+    this.toastVisible = true;
+    setTimeout(() => {
+      this.toastVisible = false;
+    }, duration);
+  },
     },
 };
 </script>
