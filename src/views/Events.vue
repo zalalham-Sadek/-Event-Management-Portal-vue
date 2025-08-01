@@ -79,7 +79,7 @@ export default {
           return (
             (!this.filters.type || event.type === this.filters.type) &&
             (!this.filters.location || event.location === this.filters.location) &&
-            (!this.filters.date || event.date === this.filters.date)
+            (!this.filters.date || event.date >= this.filters.date)
           );
         })
         .filter(event => {
