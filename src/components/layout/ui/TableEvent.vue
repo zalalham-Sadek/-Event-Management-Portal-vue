@@ -52,6 +52,7 @@
         </tbody>
     </table>
     <EventDetailModal
+    :title="title"
   :visible="showModal"
   :event="selectedEvent"
   @close="closeModal"
@@ -72,6 +73,7 @@ export default {
             required: true,
         },
         paginatedEvents: Array,
+        title:String,
     },
     components: {
   EventDetailModal,ToastMessage
@@ -95,21 +97,23 @@ export default {
             console.log('Editing:', event);
         },
 deleteEvent(event) {
-  const stored = localStorage.getItem('events');
+  const key = this.title.toLowerCase(); // 'events' or 'speakers', etc.
+  const stored = localStorage.getItem(key);
   if (!stored) return;
 
-  const events = JSON.parse(stored);
-  const updatedEvents = events.filter(e => e.id !== event.id);
-  localStorage.setItem('events', JSON.stringify(updatedEvents));
+  const items = JSON.parse(stored);
+  const updatedItems = items.filter(e => e.id !== event.id);
+  localStorage.setItem(key, JSON.stringify(updatedItems));
 
   // Show toast
-  this.showToast('Event deleted successfully', 'success');
+  this.showToast(`${this.title.slice(0, -1)} deleted successfully`, 'success');
 
   // Optional: Delay reload slightly so toast is visible
   setTimeout(() => {
-    window.location.reload(); // Or reload your data without full page reload
+    window.location.reload(); // Or re-fetch data dynamically
   }, 1000);
 }
+
 ,
           viewEvent(event) {
     this.selectedEvent = event;

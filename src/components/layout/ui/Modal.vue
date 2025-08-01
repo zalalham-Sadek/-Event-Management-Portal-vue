@@ -9,7 +9,7 @@
       >
         <!-- Header -->
         <div class="flex justify-between items-center border-b border-gray-300 dark:border-gray-700 pb-2">
-          <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">Event Details:</h1>
+          <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">{{singularTitle}} Details</h1>
           <button
             @click="closeModal"
             class="text-2xl text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
@@ -20,12 +20,14 @@
 
         <!-- Modal content -->
         <div class="mt-4 space-y-2 text-gray-700 dark:text-gray-200 text-sm sm:text-base">
-          <p><strong class="inline-block w-24">Title:</strong> {{ event?.title }}</p>
-          <p><strong class="inline-block w-24">Type:</strong> {{ event?.type }}</p>
-          <p><strong class="inline-block w-24">Date:</strong> {{ event?.date }}</p>
-          <p><strong class="inline-block w-24">Audience:</strong> {{ event?.audience }}</p>
-          <p><strong class="inline-block w-24">Location:</strong> {{ event?.location }}</p>
-          <p><strong class="inline-block w-24">Speakers:</strong> {{ event?.speakers?.join(', ') }}</p>
+          <p v-if="event.title"><strong class="inline-block w-24">Title:</strong> {{ event?.title }}</p>
+          <p v-if="event.type"><strong class="inline-block w-24">Type:</strong> {{ event?.type }}</p>
+          <p v-if="event.date"><strong class="inline-block w-24">Date:</strong> {{ event?.date }}</p>
+          <p v-if="event.audience"><strong class="inline-block w-24">Audience:</strong> {{ event?.audience }}</p>
+          <p v-if="event.location"><strong class="inline-block w-24">Location:</strong> {{ event?.location }}</p>
+          <p v-if="event.speakers"><strong class="inline-block w-24">Speakers:</strong> {{ event?.speakers?.join(', ') }}</p>
+          <p v-if="event.name"><strong class="inline-block w-24">name:</strong> {{ event?.name}}</p>
+          <p v-if="event.bio"><strong class="inline-block w-24">bio:</strong> {{ event?.bio}}</p>
         </div>
       </div>
     </div>
@@ -44,6 +46,7 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    title:String
   },
   emits: ["close"],
   methods: {
@@ -51,6 +54,14 @@ export default {
       this.$emit("close");
     },
   },
+  computed: {
+  singularTitle() {
+    // Basic singularization: remove last 's' if present
+    if (!this.title) return '';
+    return this.title.endsWith('s') ? this.title.slice(0, -1) : this.title;
+  }
+}
+
 };
 </script>
 
