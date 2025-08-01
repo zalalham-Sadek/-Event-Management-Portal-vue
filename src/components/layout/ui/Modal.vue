@@ -27,7 +27,12 @@
           <p v-if="event.location"><strong class="inline-block w-24">Location:</strong> {{ event?.location }}</p>
           <p v-if="event.speakers"><strong class="inline-block w-24">Speakers:</strong> {{ event?.speakers?.join(', ') }}</p>
           <p v-if="event.name"><strong class="inline-block w-24">name:</strong> {{ event?.name}}</p>
-          <p v-if="event.bio"><strong class="inline-block w-24">bio:</strong> {{ event?.bio}}</p>
+          <p v-if="event.availableDates"><strong class="inline-block w-24">available date:</strong> {{ event?.availableDates}}</p>
+          <p v-if="event.topics"><strong class="inline-block w-24">topics:</strong> {{ event?.topics}}</p>
+<p v-if="event.events && allEvents">
+  <strong class="inline-block w-24">Events:</strong>
+  {{ getEventTitles(event.events).join(', ') }}
+</p>
         </div>
       </div>
     </div>
@@ -46,13 +51,22 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    title:String
+    title:String,
+    allEvents:Object
   },
   emits: ["close"],
   methods: {
     closeModal() {
       this.$emit("close");
     },
+    getEventTitles(eventIds) {
+        // console.log("hhhh" +eventIds);
+        
+    if (!Array.isArray(eventIds) || !Array.isArray(this.allEvents)) return [];
+    return this.allEvents
+      .filter(ev => eventIds.includes(ev.id))
+      .map(ev => ev.title);
+  }
   },
   computed: {
   singularTitle() {

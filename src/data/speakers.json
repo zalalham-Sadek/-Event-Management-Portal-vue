@@ -1,22 +1,92 @@
 [
-  { "id": 1, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 2, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 3, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 4, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 5, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 6, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 7, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 8, "name": "Sarah Lee" ,"bio":"ertyuthgfdsfgh"},
-  { "id": 9, "name": "Ali Ahmed","bio":"ertyuthgfdsfgh" },
-  { "id": 10, "name": "Mona Khaled","bio":"ertyuthgfdsfgh" },
-    { "id": 11, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 12, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 13, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 14, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 15, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 16, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 17, "name": "John Doe","bio":"ertyuthgfdsfgh" },
-  { "id": 18, "name": "Sarah Lee" ,"bio":"ertyuthgfdsfgh"},
-  { "id": 19, "name": "Ali Ahmed","bio":"ertyuthgfdsfgh" },
-  { "id": 20, "name": "Mona Khaled","bio":"ertyuthgfdsfgh" }
+  {
+    "id": 1,
+    "name": "Dr. Amina Rahman",
+    "bio": "Expert in public health and community outreach.",
+    "photo": "speakers/amina.jpg",
+    "availableDates": ["2025-08-03", "2025-08-04", "2025-08-07", "2025-08-10", "2025-08-15"],  
+    "events": [1, 6], 
+    "topics": ["Public Health", "Youth Empowerment"]
+  },
+  {
+    "id": 2,
+    "name": "Omar Saleh",
+    "bio": "Data scientist and educator in AI.",
+    "photo": "speakers/omar.jpg",
+    "availableDates": ["2025-08-04", "2025-08-06", "2025-08-15", "2025-08-18", "2025-08-22"],
+    "events": [15,6],
+    "topics": ["AI for Good", "Machine Learning Basics"]
+  },
+  {
+    "id": 3,
+    "name": "Sarah Johnson",
+    "bio": "Cybersecurity expert and ethical hacker.",
+    "photo": "speakers/sarah.jpg",
+    "availableDates": ["2025-08-18", "2025-08-20", "2025-08-25", "2025-09-03", "2025-09-09"],
+    "events": [3, 9],
+    "topics": ["Cybersecurity", "Web Security", "Ethical Hacking"]
+  },
+  {
+    "id": 4,
+    "name": "Michael Chen",
+    "bio": "Cloud architecture specialist and DevOps engineer.",
+    "photo": "speakers/michael.jpg",
+    "availableDates": ["2025-08-20", "2025-08-22", "2025-08-28", "2025-09-01", "2025-09-05"],
+    "events": [4, 8],
+    "topics": ["Cloud Computing", "DevOps", "Kubernetes"]
+  },
+  {
+    "id": 5,
+    "name": "Lisa Rodriguez",
+    "bio": "Python instructor and software development mentor.",
+    "photo": "speakers/lisa.jpg",
+    "availableDates": ["2025-08-22", "2025-08-25", "2025-09-01", "2025-09-12", "2025-09-16"],
+    "events": [5, 13],
+    "topics": ["Python", "Software Development", "Education"]
+  },
+  {
+    "id": 6,
+    "name": "David Kim",
+    "bio": "Entrepreneur and startup advisor.",
+    "photo": "speakers/david.jpg",
+    "availableDates": ["2025-08-25", "2025-08-28", "2025-09-05", "2025-09-14", "2025-09-20"],
+    "events": [6, 19],
+    "topics": ["Entrepreneurship", "Startups", "Business Strategy"]
+  },
+  {
+    "id": 7,
+    "name": "Dr. Emily Watson",
+    "bio": "AI researcher specializing in healthcare applications.",
+    "photo": "speakers/emily.jpg",
+    "availableDates": ["2025-08-28", "2025-09-01", "2025-09-07", "2025-09-12", "2025-09-18"],
+    "events": [7, 11],
+    "topics": ["AI in Healthcare", "Machine Learning", "Medical Technology"]
+  },
+  {
+    "id": 8,
+    "name": "Alex Thompson",
+    "bio": "Mobile development expert and React Native specialist.",
+    "photo": "speakers/alex.jpg",
+    "availableDates": ["2025-09-01", "2025-09-03", "2025-09-09", "2025-09-16", "2025-09-22"],
+    "events": [8, 12],
+    "topics": ["React Native", "Mobile Development", "Cross-platform Apps"]
+  },
+  {
+    "id": 9,
+    "name": "Maria Garcia",
+    "bio": "IT administrator and cybersecurity trainer.",
+    "photo": "speakers/maria.jpg",
+    "availableDates": ["2025-09-03", "2025-09-05", "2025-09-12", "2025-09-18", "2025-09-24"],
+    "events": [9, 16],
+    "topics": ["IT Administration", "Cybersecurity", "System Security"]
+  },
+  {
+    "id": 10,
+    "name": "James Wilson",
+    "bio": "Environmental technology advocate and green tech expert.",
+    "photo": "speakers/james.jpg",
+    "availableDates": ["2025-09-05", "2025-09-07", "2025-09-14", "2025-09-20", "2025-09-26"],
+    "events": [10, 15],
+    "topics": ["Green Technology", "Sustainability", "Environmental Tech"]
+  }
 ]
