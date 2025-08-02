@@ -1,21 +1,20 @@
 import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
+  base: '/-Event-Management-Portal-vue/', // ✅ put base here (not in resolve)
   plugins: [
     vue(),
     vueDevTools(),
     tailwindcss()
   ],
   resolve: {
-    base: '/-Event-Management-Portal-vue/',
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
-    },
-  },
+    }
+  }
 })
