@@ -13,6 +13,7 @@ export default defineConfig({
     tailwindcss()
   ],
   resolve: {
+    base: '/-Event-Management-Portal-vue/',
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
