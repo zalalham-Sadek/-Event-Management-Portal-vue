@@ -3,7 +3,6 @@
 
   <div class="p-6 max-w-7xl mx-auto bg-gray-50">
     <headPage part="Events" title="Add Event" :enableBtn="false" href="" />
-
     <div class="col-span-12 md:col-span-4">
       <div
         class="bg-background-secondary space-y-3 dark:bg-box-dark m-0 p-8 text-body dark:text-subtitle-dark text-[15px] rounded-10 relative"
@@ -66,9 +65,10 @@
           </div>
 
           <div class="pt-6">
-            <button class="bg-primary text-white px-6 py-2 rounded-xl hover:bg-blue-700">
-              Save Event
-            </button>
+            <button class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-2 rounded-xl hover:opacity-90 transition">
+  Save Event
+</button>
+
           </div>
         </form>
       </div>

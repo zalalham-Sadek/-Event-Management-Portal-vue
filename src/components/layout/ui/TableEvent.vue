@@ -4,8 +4,8 @@
             <thead class="text-xs text-gray-700 uppercase">
                 <tr class="border-b border-gray-300">
                     <th class="px-4 sm:px-6">
-                        <input type="checkbox" />
-                    </th>
+                        # 
+                       </th>
                     <th v-for="(col, index) in colTitle" :key="index" class="px-4 py-3 sm:px-6 relative">
                         <div class="absolute top-1/4 bottom-1/4 right-0 w-px bg-gray-200"></div>
                         {{ col }}
@@ -17,7 +17,7 @@
                 <tr v-for="(event, index) in paginatedEvents" :key="index"
                     class="border-b border-gray-300 hover:bg-gray-50">
                     <td class="px-4 py-4 sm:px-6">
-                        <input type="checkbox" />
+                        #
                     </td>
 
                     <td v-for="(col, colIndex) in colTitle" :key="colIndex" class="px-4 py-4 sm:px-6 whitespace-nowrap">
@@ -30,7 +30,7 @@
                                 <div v-if="openDropdown === index"
                                     class="origin-top-right absolute left-0 mt-2 rounded-md shadow-lg bg-white z-50 focus:outline-none">
                                     <div class="py-1 text-sm text-gray-700">
-                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100" @click="editEvent(event)">
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100" @click.prevent="editEvent(event)">
                                             <i class="fas fa-edit pr-3 text-xs"></i>Edit
                                         </a>
                                         <a href="#" class="block px-4 py-2 hover:bg-gray-100"
@@ -103,6 +103,7 @@ export default {
         },
         editEvent(event) {
             console.log('Editing:', event);
+              alert('Edition feature coming soon!')
         },
         deleteEvent(event) {
             const key = this.title.toLowerCase(); // example: "events"

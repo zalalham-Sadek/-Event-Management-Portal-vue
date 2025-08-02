@@ -35,7 +35,7 @@ const sidebarOpen = ref(false)
 const sidebarCollapsed = ref(false)
 
 const userStore = useUserStore()
-
+userStore.loadUserFromStorage()
 // ✅ Computed to check login state
 const isLoggedIn = computed(() => userStore.isAuthenticated)
 </script>
