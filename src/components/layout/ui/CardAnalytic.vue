@@ -15,7 +15,7 @@ export default {
     props:{
         class:String,
         title:String,
-        total:String
+        total:Number
     }
 }
 </script>

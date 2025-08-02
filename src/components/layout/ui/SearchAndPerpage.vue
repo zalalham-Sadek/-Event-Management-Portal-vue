@@ -1,11 +1,13 @@
 <template>
   <div class="flex items-center justify-between gap-4 px-5 border-b border-gray-300 pb-5 pt-2">
-    <InputField
+    <div class="w-80">
+          <InputField
       icon="fas fa-search"
       type="text"
       placeholder="Search..."
       v-model="localSearchQuery"
     />
+    </div>
     <PaginationSelection
       v-model="localItemsPerPage"
     />
