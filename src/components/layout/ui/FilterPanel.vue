@@ -3,20 +3,20 @@
     <SelectField
       icon="fas fa-chevron-down"
       :modelValue="filters.type"
-      label="Select Type"
+      label="Type"
       :data="eventTypes"
       @update:modelValue="updateFilter('type', $event)"
     />
     <SelectField
       icon="fas fa-chevron-down"
-      label="Filter by Location"
+      label="Location"
       :data="eventLocations"
       :modelValue="filters.location"
       @update:modelValue="updateFilter('location', $event)"
     />
     <InputField
       :type="'date'"
-      :placeholder="'حدد التاريخ'"
+      :placeholder="' Date '"
       :modelValue="filters.date"
       @update:modelValue="updateFilter('date', $event)"
     />

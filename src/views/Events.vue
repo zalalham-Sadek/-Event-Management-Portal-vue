@@ -138,6 +138,7 @@ export default {
   },
   editEvent(event) {
     // implement your edit logic here (e.g., open form with event data)
+      alert('Edit profile feature coming soon!')
     console.log('Edit event:', event);
     // After editing and updating events array, call this.updateLocalStorage()
   },
