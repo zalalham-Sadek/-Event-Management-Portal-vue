@@ -86,7 +86,7 @@
     "bio": "Environmental technology advocate and green tech expert.",
     "photo": "speakers/james.jpg",
     "availableDates": ["2025-09-05", "2025-09-07", "2025-09-14", "2025-09-20", "2025-09-26"],
-    "events": [10, 15],
+    "events": [10, 15,1],
     "topics": ["Green Technology", "Sustainability", "Environmental Tech"]
   }
 ]
