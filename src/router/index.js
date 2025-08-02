@@ -19,7 +19,20 @@ const router = createRouter({
     routes
 });
 
+// ✅ Navigation Guard
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem('user') !== null
 
+  // Allow access to login page
+  if (to.path === '/login') {
+    next()
+  } else if (!isAuthenticated) {
+    // Redirect to login if not logged in
+    next({ path: '/login' })
+  } else {
+    next()
+  }
+})
 
 
 export default router;
