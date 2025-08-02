@@ -49,6 +49,14 @@
         <BaseBarChart :chartData="eventsLocationData" :chartOptions="chartOptions" />
       </div>
     </div>
+    <!-- 📆 Events by Month (Doughnut Chart) -->
+<div class="mt-12">
+  <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-white">📆 Events by Month</h3>
+  <div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md">
+    <BaseDoughnutChart :chartData="eventsByMonthData" :chartOptions="chartOptions" />
+  </div>
+</div>
+
 
     <!-- 👤 Speakers by Event Count -->
     <div class="mt-12">
@@ -65,6 +73,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useUserStore } from '@/store/user'
 import ToastMessage from '@/components/layout/ui/ToastMessage.vue'
 import BaseBarChart from '@/components/layout/ui/BarChart.vue'
+import BaseDoughnutChart from '@/components/layout/ui/BaseDoughnutChart.vue'
 
 // 📦 State
 const events = ref([])
@@ -123,6 +132,28 @@ const speakersEventData = computed(() => ({
     data: speakersByEventCount.value.map(s => s.events)
   }]
 }))
+
+// 📅 Events by Month (for Doughnut Chart)
+const eventsByMonth = computed(() => {
+  const monthMap = {}
+  events.value.forEach(e => {
+    const month = new Date(e.date).toLocaleString('default', { month: 'short', year: 'numeric' })
+    monthMap[month] = (monthMap[month] || 0) + 1
+  })
+  return monthMap
+})
+
+const eventsByMonthData = computed(() => ({
+  labels: Object.keys(eventsByMonth.value),
+  datasets: [{
+    label: 'Events per Month',
+    backgroundColor: [
+      '#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#22d3ee', '#14b8a6', '#f43f5e', '#eab308'
+    ],
+    data: Object.values(eventsByMonth.value)
+  }]
+}))
+
 
 const chartOptions = {
   responsive: true,
