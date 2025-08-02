@@ -17,7 +17,7 @@
 
     <!-- Main Content -->
     <main
-      class=" transition-all duration-300 overflow-y-auto bg-gray-50"
+      class=" transition-all duration-300  bg-gray-50"
       :class="isLoggedIn ? (sidebarCollapsed ? 'md:pl-20 pt-16' : 'md:pl-64 pt-16') : ''"
     >
       <router-view />
@@ -35,20 +35,6 @@ const sidebarOpen = ref(false)
 const sidebarCollapsed = ref(false)
 
 const userStore = useUserStore()
-
-onMounted(() => {
-  userStore.loadUserFromStorage()
-
-   if (sessionStorage.getItem('loginSuccess') === 'true') {
-    showLoginSuccess.value = true
-    sessionStorage.removeItem('loginSuccess') // ✅ Clear after showing
-
-    setTimeout(() => {
-      showLoginSuccess.value = false
-    }, 3000) // Hide after 3 seconds
-  }
-
-})
 
 // ✅ Computed to check login state
 const isLoggedIn = computed(() => userStore.isAuthenticated)
