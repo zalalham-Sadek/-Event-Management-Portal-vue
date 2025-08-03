@@ -17,7 +17,7 @@
 
     <!-- Main Content -->
     <main
-      class=" transition-all duration-300  bg-gray-50"
+      class=" transition-all duration-300  "
       :class="isLoggedIn ? (sidebarCollapsed ? 'md:pl-20 pt-16' : 'md:pl-64 pt-16') : ''"
     >
       <router-view />

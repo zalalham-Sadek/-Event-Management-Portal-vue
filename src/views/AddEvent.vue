@@ -1,7 +1,7 @@
 <template>
   <ToastMessage :message="toastMessage" :visible="toastVisible" :type="toastType" />
 
-  <div class="p-6 max-w-7xl mx-auto bg-gray-50">
+  <div class="p-6 max-w-7xl mx-auto ">
     <headPage part="Events" title="Add Event" :enableBtn="false" href="" />
     <div class="col-span-12 md:col-span-4">
       <div
@@ -33,7 +33,7 @@
               <input
                 ref="tagInput"
                 id="tags"
-                class="appearance-none w-full pl-10 pr-4 py-2 text-sm rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-secondary"
+                class="appearance-none w-full pl-10 pr-4 py-2 text-sm rounded-xl border border-primary-border dark:border-gray-600 bg-background-secondary  text-secondary-text  focus:outline-none focus:ring-2 focus:ring-primary-border"
                 placeholder="choose Speakers"
                 v-model="speakersString"
               />
@@ -65,7 +65,7 @@
           </div>
 
           <div class="pt-6">
-            <button class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-2 rounded-xl hover:opacity-90 transition">
+            <button class="bg-gradient-to-r from-background-primary to-background-primary/81 text-white hover:opacity-50 dark:outline-1 px-6 py-2 rounded-xl  transition">
   Save Event
 </button>
 

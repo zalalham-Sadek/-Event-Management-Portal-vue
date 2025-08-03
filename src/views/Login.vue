@@ -22,7 +22,7 @@
                 </div>
 
                 <button type="submit"
-                    class="w-full bg-primary text-primary-text py-2 rounded hover:bg-secondary transition">sign in</button>
+                    class="w-full bg-background-primary text-primary-text py-2 rounded hover:bg-secondary transition">sign in</button>
             </form>
         </div>
     </div>

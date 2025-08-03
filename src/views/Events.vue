@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 max-w-7xl mx-auto bg-gray-50">
+  <div class="p-6 max-w-7xl mx-auto ">
 
     <headPage part="Events" title="overview" :enableBtn="true" btnTitle="Add Event" href="/events/create"  />
 
