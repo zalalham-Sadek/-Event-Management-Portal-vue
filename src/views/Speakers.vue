@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 max-w-7xl mx-auto bg-gray-50">
+  <div class="p-6 max-w-7xl mx-auto ">
 
         <headPage part="Speakers" title="overview" :enableBtn="false" href="" />
 

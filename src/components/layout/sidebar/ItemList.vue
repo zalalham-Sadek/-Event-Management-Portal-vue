@@ -1,5 +1,5 @@
 <template>
-          <router-link :to="href" class="flex items-center justify-start gap-3 text-primary">
+          <router-link :to="href" class="flex items-center justify-start gap-3 text-primary-text">
             <slot></slot>
             <span v-if="!sidebarCollapsed" class="text-[18px] ">{{label}}</span></router-link>
 </template>
