@@ -3,11 +3,16 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-background-primary: #ffffff;
+    --color-background-primary: #5189AC;
     --color-background-secondary: #ffffff;
-    --color-primary-text: #1a1a1a;
-    --color-secondary-text: #1a1a1a;
-    --color-primary-border: #1a1a1a;
+    --color-primary-text: #F7FAFC;
+    --color-secondary-text: #4A5568;
+    --color-primary-border: #E2E8F0;
+    --color-hover:#3A6C8B;
+    --color-warning:#E53E3E;
+    --color-sucess:#38A169;
+
+
 
   --color-primary: #10b981;
   --color-primary-100: #fffffffd;
@@ -20,21 +25,28 @@
 
 @layer base {
   .dark {
-    --color-background-primary: #0f1a12;
-    --color-background-secondary: #4e7a5a;
-    --color-primary-text: #1a1a1a;
-    --color-secondary-text: #1a1a1a;
-    --color-primary-border: #1a1a1a;
+    --color-background-primary: #1A202C;
+    --color-background-secondary:#213b4a;
+    --color-primary-text: #E2E8F0;
+    --color-secondary-text:  #E2E8F0;
+    --color-primary-border:#4A5568;
+    --color-hover:#3A6C8B;
+    --color-warning:#FC8181;
+    --color-success:#68D391;
 
-    --color-primary: #99dbb1;
-    --color-primary-100: #05462d;
+    --color-primary: ##5189AC;
+
+
+
+
+    /* --color-primary-100: #05462d;
 
     --color-accent: #99dbb3;
     --color-secondary: #008f32;
 
     --color-primary-text: #f0fdf4;
     --color-primary-text: #fffffffd;
-    --color-gray-50: #577556;
+    --color-gray-50: #577556; */
   }
 }
 

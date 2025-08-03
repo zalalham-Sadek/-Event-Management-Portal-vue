@@ -6,7 +6,7 @@
     type="success"
   />
 
-  <div class="p-6 space-y-10">
+  <div class="p-6 space-y-10 bg-background-secondary">
     <WellcomeCard  :userName="userName"/>
     <!-- cards to the total events , event without speakers, upcoming event -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
