@@ -63,6 +63,7 @@
 <script>
 import EventDetailModal from './Modal.vue';
 import ToastMessage from './ToastMessage.vue';
+import services from '@/services';
 
 export default {
     props: {
@@ -105,21 +106,55 @@ export default {
             console.log('Editing:', event);
               alert('Edition feature coming soon!')
         },
-        deleteEvent(event) {
-            const key = this.title.toLowerCase(); // example: "events"
-            const stored = localStorage.getItem(key);
-            if (!stored) return;
+        // deleteEvent(event) {
+        //     const key = this.title.toLowerCase(); // example: "events"
+        //     const stored = localStorage.getItem(key);
+        //     if (!stored) return;
 
-            const items = JSON.parse(stored);
-            const updatedItems = items.filter((e) => e.id !== event.id);
-            localStorage.setItem(key, JSON.stringify(updatedItems));
+        //     const items = JSON.parse(stored);
+        //     const updatedItems = items.filter((e) => e.id !== event.id);
+        //     localStorage.setItem(key, JSON.stringify(updatedItems));
 
-            this.showToast(`${this.title.slice(0, -1)} deleted successfully`, 'success');
+        //     this.showToast(`${this.title.slice(0, -1)} deleted successfully`, 'success');
 
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
-        },
+        //     setTimeout(() => {
+        //         window.location.reload();
+        //     }, 1000);
+        // },
+        
+async deleteEvent(event) {
+    try {
+        const key = this.title.toLowerCase(); // example: "users", "events"
+        
+        if (!event.id) {
+            this.showToast("Invalid item ID", "error");
+            return;
+        }
+
+        // Dynamically call the service by table name
+        const serviceName = `${key.charAt(0).toUpperCase() + key.slice(1)}Service`;
+        if (services[serviceName] && typeof services[serviceName].delete === 'function') {
+            await services[serviceName].delete(event.id);
+        } else {
+            this.showToast(`No service found for ${key}`, "error");
+            return;
+        }
+
+        // Show toast
+        const toastDuration = 3000; // 3 seconds
+        this.showToast(`${this.title.slice(0, -1)} deleted successfully`, "success", toastDuration);
+
+        // Refresh table after toast disappears
+        setTimeout(() => {
+            this.$emit("refreshData");
+        }, toastDuration);
+
+    } catch (err) {
+        console.error("Delete error:", err);
+        this.showToast("Failed to delete. Please try again.", "error");
+    }
+},
+        
         viewEvent(event) {
             this.selectedEvent = event;
             this.showModal = true;

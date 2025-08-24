@@ -3,15 +3,19 @@ import dashboard from "@/views/dashboard.vue";
 import Events from "@/views/Events.vue";
 import AddEvent from "@/views/AddEvent.vue";
 import Speakers from "@/views/Speakers.vue";
+import Users from "@/views/Users.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Setup from "@/views/Setup.vue";
 import Profile from "@/views/Profile.vue";
 import services from "@/services";
+import AddUser from "@/views/AddUser.vue";
 const routes =[
     {path:'/',name:'dashboard',component:dashboard},
     {path:'/events',name:'Events',component:Events},
     {path:'/speakers',name:'speakers',component:Speakers},
+    {path:'/users',name:'Users',component:Users},
+    {path:'/users/create',name:'Add User',component:AddUser},
     {path:'/events/create',name:'Add Event',component:AddEvent},
     {path:'/login' , name:'login', component:Login},
     {path:'/register' , name:'register', component:Register},
