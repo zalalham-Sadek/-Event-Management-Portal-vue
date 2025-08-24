@@ -1,7 +1,7 @@
 <template>
   <ToastMessage :message="toastMessage" :visible="toastVisible" :type="toastType" />
 
-  <div class="p-6 max-w-7xl mx-auto ">
+  <div class="p-6 max-w-7xl mx-auto">
     <headPage part="Events" title="Add Event" :enableBtn="false" href="" />
     <div class="col-span-12 md:col-span-4">
       <div
@@ -9,41 +9,73 @@
       >
         <form @submit.prevent="saveEvent">
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Title -->
             <div>
               <InputField v-model="newEvent.title" type="text" placeholder="Enter Event Title" />
               <p v-if="submitted && errors.title" class="text-red-500 text-xs pl-3">{{ errors.title }}</p>
             </div>
+
+            <!-- Type -->
             <div>
               <InputField v-model="newEvent.type" type="text" placeholder="Enter Event Type" />
               <p v-if="submitted && errors.type" class="text-red-500 text-xs pl-3">{{ errors.type }}</p>
             </div>
+
+            <!-- Date -->
             <div>
               <InputField v-model="newEvent.date" type="date" placeholder="Enter Event Date" />
               <p v-if="submitted && errors.date" class="text-red-500 text-xs pl-3">{{ errors.date }}</p>
             </div>
+
+            <!-- Audience -->
             <div>
               <InputField v-model="newEvent.audience" type="text" placeholder="Enter Audience" />
               <p v-if="submitted && errors.audience" class="text-red-500 text-xs pl-3">{{ errors.audience }}</p>
             </div>
+
+            <!-- Location -->
             <div>
               <InputField v-model="newEvent.location" type="text" placeholder="Enter Location" />
               <p v-if="submitted && errors.location" class="text-red-500 text-xs pl-3">{{ errors.location }}</p>
             </div>
+
+            <!-- Duration -->
             <div>
+              <InputField v-model="newEvent.duration_minutes" type="number" placeholder="Duration in minutes" />
+              <p v-if="submitted && errors.duration_minutes" class="text-red-500 text-xs pl-3">{{ errors.duration_minutes }}</p>
+            </div>
+
+            <!-- Description -->
+            <div class="col-span-1 sm:col-span-2 lg:col-span-3">
+              <textarea
+                v-model="newEvent.description"
+                rows="3"
+                placeholder="Enter Event Description"
+                class="appearance-none w-full px-4 py-2 text-sm rounded-xl border border-primary-border dark:border-gray-600 bg-background-secondary text-secondary-text focus:outline-none focus:ring-2 focus:ring-primary-border"
+              ></textarea>
+              <p v-if="submitted && errors.description" class="text-red-500 text-xs pl-3">{{ errors.description }}</p>
+            </div>
+
+            <!-- Speakers -->
+            <div class="col-span-1 sm:col-span-2 lg:col-span-3">
               <input
                 ref="tagInput"
                 id="tags"
-                class="appearance-none w-full pl-10 pr-4 py-2 text-sm rounded-xl border border-primary-border dark:border-gray-600 bg-background-secondary  text-secondary-text  focus:outline-none focus:ring-2 focus:ring-primary-border"
-                placeholder="choose Speakers"
+                class="appearance-none w-full pl-10 pr-4 py-2 text-sm rounded-xl border border-primary-border dark:border-gray-600 bg-background-secondary text-secondary-text focus:outline-none focus:ring-2 focus:ring-primary-border"
+                placeholder="Choose Speakers"
                 v-model="speakersString"
               />
               <p v-if="submitted && errors.speakers" class="text-red-500 text-xs mt-1">{{ errors.speakers }}</p>
+
+              <!-- Speakers availability messages -->
               <p v-if="newEvent.date && tagSuggestions.length === 0" class="text-orange-500 text-xs mt-1">
                 ⚠️ No speakers available for the selected date ({{ newEvent.date }})
               </p>
               <p v-if="newEvent.date && tagSuggestions.length > 0" class="text-green-500 text-xs mt-1">
                 ✅ {{ tagSuggestions.length }} speaker(s) available for {{ newEvent.date }}
               </p>
+
+              <!-- List of available speakers -->
               <div v-if="newEvent.date && availableSpeakersDetails.length > 0" class="mt-2 p-2 bg-gray-50 rounded-lg">
                 <p class="text-xs text-gray-600 mb-1">Available speakers:</p>
                 <div class="space-y-1">
@@ -53,6 +85,8 @@
                   </div>
                 </div>
               </div>
+
+              <!-- List of selected speakers -->
               <div v-if="newEvent.speakers && newEvent.speakers.length > 0" class="mt-2 p-2 bg-blue-50 rounded-lg">
                 <p class="text-xs text-blue-600 mb-1">Selected speakers:</p>
                 <div class="space-y-1">
@@ -64,11 +98,13 @@
             </div>
           </div>
 
+          <!-- Submit Button -->
           <div class="pt-6">
-            <button class="bg-gradient-to-r from-background-primary to-background-primary/81 text-white hover:opacity-50 dark:outline-1 px-6 py-2 rounded-xl  transition">
-  Save Event
-</button>
-
+            <button
+              class="bg-gradient-to-r from-background-primary to-background-primary/81 text-white hover:opacity-50 dark:outline-1 px-6 py-2 rounded-xl transition"
+            >
+              Save Event
+            </button>
           </div>
         </form>
       </div>
@@ -81,8 +117,11 @@ import { ref, reactive, onMounted, watch, computed } from "vue";
 import Tagify from "@yaireo/tagify";
 import "@yaireo/tagify/dist/tagify.css";
 import ToastMessage from "@/components/layout/ui/ToastMessage.vue";
+import services from "@/services";
 
-const errors = reactive({ title: "", type: "", date: "", audience: "", location: "", speakers: "" });
+const errors = reactive({
+  title: "", type: "", date: "", audience: "", location: "", duration_minutes: "", description: "", speakers: ""
+});
 const tagInput = ref(null);
 const tagify = ref(null);
 const toastMessage = ref("");
@@ -90,7 +129,18 @@ const toastVisible = ref(false);
 const submitted = ref(false);
 const toastType = ref("success");
 
-const newEvent = ref({ title: "", type: "", date: "", audience: "", location: "", speakers: [], tags: [] });
+const newEvent = ref({
+  title: "",
+  type: "",
+  date: "",
+  audience: "",
+  location: "",
+  duration_minutes: "",
+  description: "",
+  speakers: [],
+  tags: []
+});
+
 const speakersString = ref("");
 const speakersData = ref([]);
 
@@ -163,48 +213,52 @@ function validate() {
   errors.date = newEvent.value.date.trim() ? "" : "date is required";
   errors.audience = newEvent.value.audience.trim() ? "" : "audience is required";
   errors.location = newEvent.value.location.trim() ? "" : "location is required";
+  errors.duration_minutes = newEvent.value.duration_minutes ? "" : "duration is required";
+  errors.description = newEvent.value.description.trim() ? "" : "description is required";
+
   const selectedSpeakers = newEvent.value.speakers || [];
   if (selectedSpeakers.length === 0) {
     errors.speakers = "choose at least one speaker";
   } else {
-    const unavailable = selectedSpeakers.filter(name => !isSpeakerAvailable(name, newEvent.value.date));
-    errors.speakers = unavailable.length > 0 ? `Not available on ${newEvent.value.date}: ${unavailable.join(", ")}` : "";
+    const unavailable = selectedSpeakers.filter((name) => !isSpeakerAvailable(name, newEvent.value.date));
+    errors.speakers =
+      unavailable.length > 0 ? `Not available on ${newEvent.value.date}: ${unavailable.join(", ")}` : "";
   }
+
   return Object.values(errors).every((e) => e === "");
 }
 
-const saveEvent = () => {
+const saveEvent = async () => {
   submitted.value = true;
   if (!validate()) {
     showToast("⚠️ Please fill in all fields correctly", 3000, "error");
     return;
   }
-  const storedEvents = localStorage.getItem("events");
-  const events = storedEvents ? JSON.parse(storedEvents) : [];
-  const nextId = events.length > 0 ? Math.max(...events.map((e) => e.id)) + 1 : 1;
 
-  const eventToSave = {
-    id: nextId,
-    ...newEvent.value,
-    tags: newEvent.value.speakers || [],
-  };
+  try {
+    const payload = {
+      title: newEvent.value.title,
+      type: newEvent.value.type,
+      event_date: newEvent.value.date,
+      audience: newEvent.value.audience,
+      location: newEvent.value.location,
+      duration_minutes: newEvent.value.duration_minutes,
+      description: newEvent.value.description,
+      speakers: newEvent.value.speakers,
+    };
 
-  if (hasScheduleConflict(eventToSave, events)) {
-    showToast("❌ A conflict exists on the same date and location for another event.", 4000, "error");
-    return;
+    await services.EventService.createEvent(payload);
+
+    // Reset form
+    newEvent.value = { title: "", type: "", date: "", audience: "", location: "", duration_minutes: "", description: "", speakers: [], tags: [] };
+    if (tagify.value) tagify.value.removeAllTags();
+    submitted.value = false;
+    showToast("✅ Event saved successfully");
+  } catch (error) {
+    console.error("Error saving event:", error);
+    showToast("❌ Failed to save event", 4000, "error");
   }
-
-  events.push(eventToSave);
-  localStorage.setItem("events", JSON.stringify(events));
-  newEvent.value = { title: "", type: "", date: "", audience: "", location: "", speakers: [], tags: [] };
-  if (tagify.value) tagify.value.removeAllTags();
-  submitted.value = false;
-  showToast("✅ Event saved successfully");
 };
-
-function hasScheduleConflict(newEvent, existingEvents) {
-  return existingEvents.some((ev) => ev.date === newEvent.date && ev.location === newEvent.location);
-}
 
 function showToast(message, duration = 3000, type = "success") {
   toastMessage.value = message;
