@@ -1,7 +1,7 @@
 <template>
   <div class="p-6 max-w-7xl mx-auto ">
 
-        <headPage part="Speakers" title="overview" :enableBtn="false" href="" />
+        <headPage part="Speakers" title="overview" :enableBtn="true" btnTitle="Add Speaker" href="/speakers/create" />
 
     <div class="col-span-12 md:col-span-6">
       <div
@@ -12,8 +12,8 @@
         <SearchAndPerpage v-model:searchQuery="searchQuery" v-model:itemsPerPage="itemsPerPage" />
         <!-- Events Table -->
         <div class="max-w-full overflow-x-auto shadow-md rounded-xl">
-          <TableSpeakers :colTitle="['name', 'bio','action']"
-            :paginatedEvents="paginatedSpeakers" title="Speakers" />
+          <TableSpeakers :colTitle="['name','email' , 'bio','availabe_date','action']"
+            :paginatedEvents="paginatedSpeakers" title="Speaker" />
           <!-- Pagination -->
           <Pagination v-model:currentPage="currentPage" :totalPages="totalPages" :itemsPerPage="itemsPerPage"
             :totalItems="Speakers.length" />
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Speakers from '@/data/speakers.json';
+import service from '@/services';
 import SearchAndPerpage from '@/components/layout/ui/SearchAndPerpage.vue';
 import TableSpeakers from '@/components/layout/ui/TableEvent.vue';
 import Pagination from '@/components/layout/ui/Pagination.vue';
@@ -39,89 +39,67 @@ export default {
       currentPage: 1,
       itemsPerPage: 10,
       openDropdown: null,
-
+      loading: false,
+      error: null,
     };
   },
   created() {
-  // Load events from localStorage or fallback to JSON file
-  const savedSpeakers = localStorage.getItem('speakers');
-  if (savedSpeakers) {
-    this.Speakers = JSON.parse(savedSpeakers);
-  } else {
-    this.Speakers = Speakers;
-    // Save default events to localStorage for future use
-    localStorage.setItem('speakers', JSON.stringify(Speakers));
-  }
-},
+    this.loadSpeakers();
+  },
   components: {
-    SearchAndPerpage,  HeadPage, TableSpeakers, Pagination
+    SearchAndPerpage,
+    HeadPage,
+    TableSpeakers,
+    Pagination,
   },
   computed: {
-    // eventTypes() {
-    //   return [...new Set(this.Speakers.map(e => e.type))];
-    // },
-    
-    // eventLocations() {
-    //   return [...new Set(this.events.map(e => e.location))];
-    // },
     filteredSpeakers() {
-      return this.Speakers
-        .filter(speaker => {
-          const q = this.searchQuery.toLowerCase();
-          return (
-            speaker.name.toLowerCase().includes(q) 
-          );
-        });
+      return this.Speakers.filter((speaker) => {
+        const q = this.searchQuery.toLowerCase();
+        return speaker.name.toLowerCase().includes(q);
+      });
     },
     totalPages() {
-        console.log("filtered speaker" + this.filteredSpeakers)
-        return Math.ceil(this.filteredSpeakers.length / this.itemsPerPage);
+      return Math.ceil(this.filteredSpeakers.length / this.itemsPerPage);
     },
     paginatedSpeakers() {
       const start = (this.currentPage - 1) * this.itemsPerPage;
       const end = start + this.itemsPerPage;
-      console.log( this.itemsPerPage);
       return this.filteredSpeakers.slice(start, end);
-    }
+    },
   },
   watch: {
-    // filters: {
-    //   deep: true,
-    //   handler() {
-    //     this.currentPage = 1;
-    //   }
-    // },
-    itemsPerPage(newVal) {
-      console.log('speakers.vue: itemsPerPage changed to:', newVal);
-      console.log('speakers.vue: filteredSpeakers length:', this.filteredSpeakers.length);
-      console.log('speakers.vue: totalPages:', this.totalPages);
-      this.currentPage = 1; // Reset page when items per page changes
+    itemsPerPage() {
+      this.currentPage = 1;
     },
-    paginatedSpeakers(newVal) {
-      console.log('Events.vue: paginatedEvents changed, length:', newVal.length);
-    }
   },
   methods: {
+    async loadSpeakers() {
+      this.loading = true;
+      this.error = null;
+      try {
+        const response = await service.SpeakerService.getAllSpeakers();
+        this.Speakers = response.data.speakers; // adjust based on your API response structure
+      } catch (err) {
+        console.error('Failed to load speakers:', err);
+        this.error = 'Failed to load speakers.';
+      } finally {
+        this.loading = false;
+      }
+    },
     prevPage() {
       if (this.currentPage > 1) this.currentPage--;
     },
     nextPage() {
       if (this.currentPage < this.totalPages) this.currentPage++;
     },
-
-
-//   deleteEvent(event) {
-//     this.events = this.events.filter(e => e.id !== event.id);
-//     this.updateLocalStorage();
-//     console.log('Deleted event:', event);
-//   },
-
-  viewEvent(event) {
-    console.log('View event:', event);
-  }
-  }
+    viewEvent(event) {
+      console.log('View event:', event);
+    },
+  },
 };
 </script>
+
 
 <style scoped>
 table {

@@ -10,10 +10,13 @@ import Setup from "@/views/Setup.vue";
 import Profile from "@/views/Profile.vue";
 import services from "@/services";
 import AddUser from "@/views/AddUser.vue";
+import AddSpeaker from "@/views/AddSpeaker.vue";
+
 const routes =[
     {path:'/',name:'dashboard',component:dashboard},
     {path:'/events',name:'Events',component:Events},
     {path:'/speakers',name:'speakers',component:Speakers},
+    {path:'/speakers/create',name:'Add speakers',component:AddSpeaker},
     {path:'/users',name:'Users',component:Users},
     {path:'/users/create',name:'Add User',component:AddUser},
     {path:'/events/create',name:'Add Event',component:AddEvent},
