@@ -13,8 +13,8 @@
         <SearchAndPerpage v-model:searchQuery="searchQuery" v-model:itemsPerPage="itemsPerPage" />
         <!-- Events Table -->
         <div class="max-w-full overflow-x-auto shadow-md rounded-xl">
-          <TableEvent :colTitle="['Title', 'Location', 'Date', 'Audience', 'Action']"
-            :paginatedEvents="paginatedEvents" title="Events" />
+          <TableEvent :colTitle="['Title', 'Location', 'event_date', 'Audience', 'Action']"
+            :paginatedEvents="paginatedEvents" title="Event" viewMode="page" />
           <!-- Pagination -->
           <Pagination v-model:currentPage="currentPage" :totalPages="totalPages" :itemsPerPage="itemsPerPage"
             :totalItems="filteredEvents.length" />
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import eventData from '@/data/events.json';
 import SearchAndPerpage from '@/components/layout/ui/SearchAndPerpage.vue';
 import SelectField from '@/components/layout/ui/SelectField.vue';
 import InputField from '@/components/layout/ui/InputField.vue';
@@ -33,6 +32,8 @@ import FilterPanel from '@/components/layout/ui/FilterPanel.vue';
 import HeadPage from '@/components/layout/ui/HeadPage.vue';
 import TableEvent from '@/components/layout/ui/TableEvent.vue';
 import Pagination from '@/components/layout/ui/Pagination.vue';
+import services from '@/services'; // make sure EventService is registered here
+
 export default {
   name: 'EventsOverview',
   data() {
@@ -47,20 +48,13 @@ export default {
       currentPage: 1,
       itemsPerPage: 5,
       openDropdown: null,
-
+      loading: false,
+      error: ''
     };
   },
-  created() {
-  // Load events from localStorage or fallback to JSON file
-  const savedEvents = localStorage.getItem('events');
-  if (savedEvents) {
-    this.events = JSON.parse(savedEvents);
-  } else {
-    this.events = eventData;
-    // Save default events to localStorage for future use
-    localStorage.setItem('events', JSON.stringify(eventData));
-  }
-},
+  async mounted() {
+    await this.loadEvents();
+  },
   components: {
     SearchAndPerpage,
     SelectField, InputField, FilterPanel, HeadPage, TableEvent, Pagination
@@ -69,7 +63,6 @@ export default {
     eventTypes() {
       return [...new Set(this.events.map(e => e.type))];
     },
-    
     eventLocations() {
       return [...new Set(this.events.map(e => e.location))];
     },
@@ -79,7 +72,7 @@ export default {
           return (
             (!this.filters.type || event.type === this.filters.type) &&
             (!this.filters.location || event.location === this.filters.location) &&
-            (!this.filters.date || event.date >= this.filters.date)
+            (!this.filters.date || event.event_date >= this.filters.date)
           );
         })
         .filter(event => {
@@ -97,28 +90,24 @@ export default {
     paginatedEvents() {
       const start = (this.currentPage - 1) * this.itemsPerPage;
       const end = start + this.itemsPerPage;
-      console.log( this.itemsPerPage);
       return this.filteredEvents.slice(start, end);
     }
   },
-  watch: {
-    filters: {
-      deep: true,
-      handler() {
-        this.currentPage = 1;
+  methods: {
+    async loadEvents() {
+      this.loading = true;
+      this.error = '';
+      try {
+        const response = await services.EventService.getAllEvents();
+        // Adjust response shape depending on API
+        this.events = response.data.events || response.data || [];
+      } catch (err) {
+        console.error('Error loading events:', err);
+        this.error = 'Failed to load events. Please try again.';
+      } finally {
+        this.loading = false;
       }
     },
-    itemsPerPage(newVal) {
-      console.log('Events.vue: itemsPerPage changed to:', newVal);
-      console.log('Events.vue: filteredEvents length:', this.filteredEvents.length);
-      console.log('Events.vue: totalPages:', this.totalPages);
-      this.currentPage = 1; // Reset page when items per page changes
-    },
-    paginatedEvents(newVal) {
-      console.log('Events.vue: paginatedEvents changed, length:', newVal.length);
-    }
-  },
-  methods: {
     prevPage() {
       if (this.currentPage > 1) this.currentPage--;
     },
@@ -128,26 +117,24 @@ export default {
     toggleDropdown(index) {
       this.openDropdown = this.openDropdown === index ? null : index;
     },
-   updateLocalStorage() {
-    localStorage.setItem('events', JSON.stringify(this.events));
-  },
-  deleteEvent(event) {
-    this.events = this.events.filter(e => e.id !== event.id);
-    this.updateLocalStorage();
-    console.log('Deleted event:', event);
-  },
-  editEvent(event) {
-    // implement your edit logic here (e.g., open form with event data)
-      alert('Edit profile feature coming soon!')
-    console.log('Edit event:', event);
-    // After editing and updating events array, call this.updateLocalStorage()
-  },
-  viewEvent(event) {
-    console.log('View event:', event);
-  }
+    async deleteEvent(event) {
+      try {
+        await services.EventService.delete(event.id);
+        this.events = this.events.filter(e => e.id !== event.id);
+      } catch (err) {
+        console.error('Failed to delete event:', err);
+      }
+    },
+    editEvent(event) {
+      alert('Edit feature coming soon!');
+    },
+    viewEvent(event) {
+      console.log('View event:', event);
+    }
   }
 };
 </script>
+
 
 <style scoped>
 table {

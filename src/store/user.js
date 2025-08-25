@@ -8,8 +8,8 @@ export const useUserStore = defineStore('user', {
 
   getters: {
     userRole: (state) => state.user?.role || 'guest',
-    isOrganizer: (state) => state.user?.role === 'organizer',
-    isAudience: (state) => state.user?.role === 'audience',
+    isAdmin: (state) => state.user?.role === 'admin',
+    isUser: (state) => state.user?.role === 'user',
     // isAuthenticated : (state) => !!state.user
   },
 

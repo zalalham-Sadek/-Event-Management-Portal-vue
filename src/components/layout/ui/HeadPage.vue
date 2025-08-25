@@ -34,5 +34,5 @@ const props = defineProps({
   },
 })
 const userStore = useUserStore()
-const showButton = computed(() => props.enableBtn && userStore.isAuthenticated && userStore.userRole=='organizer')
+const showButton = computed(() => props.enableBtn && userStore.isAuthenticated && userStore.userRole=='admin')
 </script>
