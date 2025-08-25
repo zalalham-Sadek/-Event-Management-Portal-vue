@@ -14,7 +14,7 @@
         <!-- Events Table -->
         <div class="max-w-full overflow-x-auto shadow-md rounded-xl">
           <TableEvent :colTitle="['Title', 'Location', 'event_date', 'Audience', 'Action']"
-            :paginatedEvents="paginatedEvents" title="Event" />
+            :paginatedEvents="paginatedEvents" title="Event" viewMode="page" />
           <!-- Pagination -->
           <Pagination v-model:currentPage="currentPage" :totalPages="totalPages" :itemsPerPage="itemsPerPage"
             :totalItems="filteredEvents.length" />

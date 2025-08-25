@@ -11,6 +11,7 @@ import Profile from "@/views/Profile.vue";
 import services from "@/services";
 import AddUser from "@/views/AddUser.vue";
 import AddSpeaker from "@/views/AddSpeaker.vue";
+import EventDetails from "@/views/EventDetails.vue";
 
 const routes =[
     {path:'/',name:'dashboard',component:dashboard},
@@ -23,7 +24,8 @@ const routes =[
     {path:'/login' , name:'login', component:Login},
     {path:'/register' , name:'register', component:Register},
     {path:'/setup' , name:'setup', component:Setup},
-    {path:'/profile',name:'profile',component:Profile}
+    {path:'/profile',name:'profile',component:Profile},
+    { path: "/events/:id",name:'Event Details', component: EventDetails, props: true }
 ];
 
 const router = createRouter({

@@ -1,3 +1,4 @@
+import EventDetails from '@/views/EventDetails.vue';
 import api from './api';
 
 const EventService = {
@@ -22,6 +23,10 @@ const EventService = {
     // Delete event
     delete(id) {    
         return api.delete(`/api/events/${id}`);
+    },
+
+    EventDetails(id){
+      return api.get(`/api/eventDetials/${id}`);
     }
 
 };
